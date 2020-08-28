@@ -1,0 +1,43 @@
+<!-----homepage section ------>
+{% if plate_search != 'successful'%}
+      <section>
+        <div class="container">
+          <div class="row">
+            <h1 class="mx-auto section_title">Cunt <a>V</a>ehicle</h1>
+          </div>
+          <div class="row">
+            <h6 class="mx-auto">For the Cunts</h6>
+          </div>
+          <div class="desktop_option_describe row">
+            <h6 class="mx-auto">Easily and convenience to set the status of your transportation.</h6>
+          </div>
+          <div class="desktop_option_describe row">
+            <h6 class="mx-auto">Insert plate and miles then system will remind you any alarm for maintain.</h6>
+          </div>
+          <div class="row  my-0 justify-content-md-center">
+            <form method="POST" class="form-inline my-auto ml-3 mx-auto pb-3" >
+              {% csrf_token %}
+              <input type="text" name="plate" id="plate2" onkeyup="upperCase(this.id)" class="form-control" placeholder="Plate Numbers" style="width:130px">
+              <input type="number" name="miles" class="form-control" placeholder="miles" style="width:80px">
+              <button class="btn btn-outline-success my-2 my-sm-0 fa fa-search fa-lg" type="submit" name="platesearch" style="font-size:32px;"></button>
+            </form>
+
+          </div>
+          <div class="desktop_option_describe row">
+          {% if no_plate == 'wrong' %}
+            <small class="mx-auto" style="color: red;">查無此車牌，先新增您的車牌資料</small>
+          {% endif %}
+          </div>
+          <form class=" row mt-3">
+            <button type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-plus fa-2x"></button>
+            <button data-toggle="tooltip" data-placement="bottom" title="not_ready" class="mx-2 btn btn-secondary rounded-circle fa fa-bug fa-2x"></button>
+            <button data-toggle="tooltip" data-placement="bottom" title="not_ready" class="mx-2 btn btn-secondary rounded-circle fa fa-bug fa-2x"></button>
+            <button data-toggle="tooltip" data-placement="bottom" title="not_ready" class="mr-auto mx-2 btn btn-secondary rounded-circle fa fa-bug fa-2x"></button>
+          </form>
+
+
+        </div>
+
+      </section>
+
+      {% endif %}

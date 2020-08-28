@@ -1,0 +1,608 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+  <style>
+    body{
+    margin: 0;
+    padding:0;
+    background-color: white; /* Used if the image is unavailable */
+    height: 500px; /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    }
+    header{
+    border-bottom-style:solid;
+    border-color:#d9d9d9;
+    }
+    nav{
+        opacity:1;
+    }
+
+    #loginwrong{
+    display: none;
+    {% if login_wrong == 'wrong' %}
+    display: inline-block;
+    {% endif %}
+    color: red;
+    }
+    #type_wrong{
+    display: none;
+    {% if type_wrong == 'wrong' %}
+    display: inline-block;
+    {% endif %}
+    color: red;
+    }
+    #plate_wrong{
+    display: none;
+    {% if plate_wrong == 'wrong' %}
+    display: inline-block;
+    {% endif %}
+    color: red;
+    }
+    #signupwrong{
+    display: none;
+    {% if signup_wrong == 'wrong' %}
+    display: inline-block;
+    {% endif %}
+    color: red;
+    }
+    #filterinput{
+    background-color:transparent;
+    border-style:none;
+    border-color:gray;
+    border-bottom-style:solid;
+    border-width:1px;
+    outline: none;
+    color:block;
+    }
+
+
+    #filterinput::-webkit-input-placeholder {
+    font-size: 20px;
+    }
+
+
+    #allli li {
+      border: 1px solid #ddd;
+      margin-top: -1px; /* Prevent double borders */
+      background-color: #f6f6f6;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 18px;
+      color: black;
+      display: block;
+    }
+
+    section{
+        {% if plate_search != 'successful' %}
+        padding-top:8%;
+        {% else %}
+        padding-top:3%;
+        {% endif %}
+        display:flex;
+        color:block;
+        list-style-type: none;
+    }
+
+
+    section h1.section_title{
+        font-size:300%;
+    }
+        section h1.section_title a{
+        font-size:150%;
+    }
+    .rounded-circle{
+        width: 60px;
+        height: 60px;
+    }
+
+    footer .my_right{
+        list-style-type: none;
+        background: black;
+        color:gray;
+    }
+    footer .mobile_option {
+        display: none;
+        background:#d9d9d9;
+        border-top-width:15px;
+        font-size:60%;
+    }
+    ::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+    }
+    footer {
+    position: fixed;
+    bottom: 0;
+    }
+    footer .col {
+        border:none;
+        color:gray;
+        border-radius:0px;
+    }
+    body .app_box {
+        width: 50%;
+
+      }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    #flowlist{
+    height:360px;
+    overflow: auto;
+    overflow-x: hidden;
+
+    }
+    date{
+    font-size:70%;
+    }
+    section .media{
+    width:70px;
+    height:48px;
+    }
+
+
+    img{
+      width:36px;
+      height:36px;
+      border-radius: 6px;
+    }
+
+    @media only screen and (max-width: 576px) {
+      body .desktop_option_describe {
+        display: none;
+      }
+    }
+    @media only screen and (max-width: 992px) {
+      body .desktop_option {
+        display: none;
+      }
+      body .mobile_option {
+        display: block;
+      }
+      body .app_box {
+        width: 100%;
+      }
+      footer{
+        height:4vh;
+      }
+      #flowlist{
+      height:auto;
+      }
+    }
+  {% if search_status == 'all_elements' or search_status == 'part_elements' %}
+    {% for element in main_data %}
+      #{{element.element_name}}_status{
+      width: 0%;
+      }
+    {% endfor %}
+  {% endif %}
+
+  </style>
+
+  <html>
+    <head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+      <!-- home.css CSS -->
+      <link rel="stylesheet" href="{% static 'home.css' %}" type="text/css">
+      <!-- icon CSS-->
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    </head>
+
+    <body>
+    {% include 'account/header.html' %}
+    {% include 'account/section_homepage.html' %}
+
+
+
+
+<!-----search section ------>
+
+
+      <section class="pb-4">
+
+        <!-----display plate ------>
+        {% if plate_search == 'successful' %}
+        <div class="container">
+          <div class="row  my-0 justify-content-md-center">
+            <form method="POST" class="form-inline my-auto ml-3 mx-auto pb-3" >
+              <h1 class="my-auto desktop_option mr-2">Cunt <a>V</a>ehicle</h1>
+              {% csrf_token %}
+              <input type="text" name="plate" id="plate2" onkeyup="upperCase(this.id)" class="form-control" placeholder="Plate Numbers" style="width:130px">
+              <input type="number" name="miles" class="form-control" placeholder="miles" style="width:80px">
+              <button class="btn btn-outline-success my-2 my-sm-0 fa fa-search fa-lg" type="submit" name="platesearch" style="font-size:32px;"></button>
+            </form>
+          </div>
+          <div class="row  my-0 justify-content-md-center">
+            <form method="post" class="form-inline my-auto ml-3 mx-auto pb-3">
+              <h4 class="mr-3">車牌號碼 : {{plate.plate}}</h4>
+              <h4 class="ml-3">公里數 : {{plate.miles}}</h4>
+            </form>
+          </div>
+        </div>
+        {% endif %}
+
+
+        <!-----display elements ------>
+        {% if search_status == 'all_elements' or search_status == 'part_elements' %}
+        <div class="row justify-content-md-center container-lg mx-auto">
+          <div class="mr-auto px-4 container-fluid">
+            <input type="text" id="filterinput" onkeyup="filter()" class="container-fluid" placeholder="關鍵字搜尋..."/>
+
+          </div>
+        </div>
+
+          <div class="row overflow-auto mt-2 mx-auto container-lg">
+            <div class="container-fluid mx-auto">
+              <form class="list-unstyled row row-cols-lg-4 row-cols-md-3 row-cols-2" id="flowlist">
+                {% for element in sub_data %}
+                <li class="col media px-4 my-1 mx-0 container-fluid" >
+                    <div class="my-auto">
+                      <img src="{% static 'img/build.jpg' %}" class="mx-1" alt="...">
+                    </div>
+                    <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}">
+                      <name class="row ml-auto namecheck">{{element.element_name}}</name>
+                      <date class="row ml-auto">
+
+                        {% if element.element_name in hischeck %}
+                          {% for his in history %}
+                          {% if his.element_name == element.element_name %}
+                          {{his.create}}
+                          {% endif %}
+                          {% endfor %}
+                        {%else%}
+                        null
+                        {%endif%}
+                      </date>
+                      <div class="progress" style="height: 1px;">
+                          <div class="progress-bar bg-success" id="{{element.element_name}}_status" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                </li>
+                {% endfor %}
+                {% for element in main_data %}
+                <li class="col media px-4 my-1 mx-0 container-fluid" >
+                    <div class="my-auto">
+                      <img src="{% static 'img/build.jpg' %}" class="mx-1" alt="...">
+                    </div>
+                    <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}">
+                      <name class="row ml-auto namecheck">{{element.element_name}}</name>
+                      <date class="row ml-auto">
+
+                        {% if element.element_name in hischeck %}
+                          {% for his in history %}
+                            {% if his.element_name == element.element_name %}
+                            {{his.create}}
+                            {% endif %}
+                          {% endfor %}
+                        {%else%}
+                        null
+                        {%endif%}
+                      </date>
+                      <div class="progress" style="height: 1px;">
+                          <div class="progress-bar bg-success" id="{{element.element_name}}_status" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+
+                </li>
+                {% endfor %}
+                {% if user_setting == 'successful' or search_status == 'all_elements' %}
+                <li class="col px-4 my-1 mx-0 container-fluid">
+                  <div class="px-0 container my-auto btn btn-outline-dark mx-1 my-0" data-target="#user_add_element" type="button" data-toggle="modal">
+                    <div class="row mx-auto namecheck fa fa-plus fa-2x " style="height:36px;">新增</div>
+                  </div>
+                </li>
+                {% endif %}
+              </form>
+              <div class="modal fade" id="user_add_element" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <form class="modal-footer" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="element_name" class="form-control" placeholder="零件名稱">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button class="btn btn-primary" type="submit" name="add_element" value={{plate.plate}}>確認</button>
+                      </form>
+                    </div>
+                  </div>
+              </div>
+              {% for element in main_data %}
+              <div class="modal fade" id="{{element.element_name}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        零件 {{element.element_name}} 將被維修更新
+                      </div>
+                      <form class="modal-footer" method="post">
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button class="btn btn-primary" type="submit" name="update" value={{plate}}_{{element.element_name}}>確認</button>
+                      </form>
+                    </div>
+                  </div>
+              </div>
+              {% endfor %}
+              {% for element in sub_data %}
+              <div class="modal fade" id="{{element.element_name}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-body">
+                        零件 {{element.element_name}} 將被維修更新
+                      </div>
+                      <form class="modal-footer" method="post">
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                        <button class="btn btn-primary" type="submit" name="update" value={{plate}}_{{element.element_name}}>確認</button>
+                      </form>
+                    </div>
+                  </div>
+              </div>
+              {% endfor %}
+            </div>
+
+          </div>
+        {% endif %}
+
+        <!-----display parts ------>
+        {% if search_status == 'parts' %}
+        <div class="container-fluid">
+          <form class="row mx-auto app_box" method="post" >
+            {% csrf_token %}
+            {% for model in main_data%}
+            <div class="">
+              <div class="justify-content-md-center px-4 mx-4 mb-4">
+                <button type="submit" class="px-4 py-4 btn btn-success row" name='partsearch' value={{model}}></button>
+                <lable class="row" style="text-align: center;">{{model}}</lable>
+              </div>
+            </div>
+            {% endfor %}
+          </form>
+        </div>
+        {% endif %}
+
+        <!-----display fix history ------>
+        {% if search_status == 'all_fix_history' %}
+        <div class="container">
+          <div class="row overflow-auto mt-2 mx-auto container-lg">
+            <div class="container-fluid mx-auto">
+              <form class="list-unstyled row row-cols-1">
+                {% for each_history in main_data %}
+
+                <li class="col media px-4 my-1 mx-0 container-fluid" type="button" data-toggle="modal" data-target="#{{element.element_name}}">
+                  <div class="my-auto">
+                    <img src="{% static 'img/Cuntlogo.jpg' %}" class="mx-1" alt="...">
+                  </div>
+                  <div class="px-0 container-fluid my-auto">
+                    <name class="row ml-auto namecheck">{{each_history.element_name}}</name>
+                    <date class="row ml-auto">
+                      {{each_history.create}}
+                    </date>
+                  </div>
+
+                {% endfor %}
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </section>
+
+
+
+
+
+
+      <footer class="fixed-bottom py-0 my-0">
+
+        {% if plate_search == 'successful' %}
+        <div class="container desktop_option mb-5">
+          <form class="desktop_option row mt-3" method="post">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            <button type="button" data-toggle="modal"  data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-motorcycle fa-2x"></button>
+            {% else %}
+            <button type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-plus fa-2x"></button>
+            {% endif %}
+            <button type="submit" name="platesearch" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="零件總表" class="mx-2 btn btn-secondary rounded-circle fa fa-cogs fa-2x"></button>
+            <button type="submit" name="checkpart" value="{{plate.type}}" data-toggle="tooltip" data-placement="bottom" title="主零件檢視" class="mx-2 btn btn-secondary rounded-circle fa fa-th fa-2x"></button>
+            <button type="submit" name="fixgistory" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="維修紀錄" class="mr-auto mx-2 btn btn-secondary rounded-circle fa fa-wrench fa-2x"></button>
+          </form>
+        </div>
+        <div class="container-fluid mobile_option px-0">
+          <form class="row row-cols-4 py-0  mx-1 mb-0" method="post">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+            <button  type="submit" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-motorcycle fa-lg"> 車輛管理</button>
+            {% else %}
+            <button  type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-plus fa-lg"> 新增車輛</button>
+            {% endif %}
+            <button type="submit" name="platesearch" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto py-2 col fa fa-cogs fa-lg"> 零件總表</button>
+            <button type="submit" name="checkpart" value="{{plate.type}}" class="btn btn-outline-secondary mx-auto  col fa fa-th fa-lg"> 主零件檢視</button>
+            <button type="submit" name="fixgistory" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-wrench fa-lg"> 維修紀錄</button>
+          </form>
+        </div>
+        {% else %}
+        <div class="my_right container-fluid py-0 px-0 desktop_option">
+          <li class="container mx-auto py-0 px-0">Hey shit cunt.</li>
+        </div>
+        {% endif %}
+
+      </footer>
+
+      <!----ADD MOTOR MODAL----->
+      <div class="modal fade" id="add_motor">
+          <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header py-1 my-1">
+                <h5>新增車輛</h5>
+              </div>
+              <div class="modal-body">
+                <form method="POST" class="container">
+                {% csrf_token %}
+                  <div class="form-group row">
+                    <label class="py-0 my-0">車牌號碼</label>
+                    <input type="text" id="add_plate" onkeyup="upperCase(this.id)" class="form-control" name="plate">
+                  </div>
+                  <div class="form-group row">
+                    <label class="py-0 my-0">車牌型號</label>
+                    <input type="text" id="add_type" onkeyup="upperCase(this.id)" class="form-control" name="type">
+                    <small style="color: gray;">如暫無車牌型號將建立機車基本清單</small>
+                  </div>
+                  <div class="form-group row">
+                    <label class="py-0 my-0">公里數</label>
+                    <input type="number" class="form-control" name="miles">
+                    <small id="plate_wrong">車牌號碼已存在</small>
+                  </div>
+                  <div class="row mt-0 justify-content-end">
+                    <button type="submit" class="btn btn-primary mr-auto" name="add_motor">Submit</button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <!--JavaScript at end of body for optimized loading-->
+      <!--bootstrap-->
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script type="text/javascript">
+          function upperCase(id){
+          var y=document.getElementById(id).value
+          document.getElementById(id).value=y.toUpperCase()
+          }
+
+
+          function filter() {
+
+              var input, filter, parents, child, kid, a, i, j, txtValue;
+              input = document.getElementById("filterinput");
+              filter = input.value.toUpperCase();
+              parents = document.getElementById("flowlist");
+              child = parents.getElementsByTagName("li");
+              kid = document.getElementsByTagName("name");
+              for (j=0; j < kid.length; j++){
+                a = kid[j]
+                txtValue = a.textContent || a.innerText;
+                console.log(txtValue);
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    child[j].style.display = "";
+                } else {
+                    child[j].style.display = "none";
+                }
+
+              }
+          }
+
+          $(document).ready(function(){
+          {% if search_status == 'all_elements' or search_status == 'part_elements' %}
+          var plate_miles = {{plate.miles}};
+          {% for element in main_data %}
+            {% if element.element_expired_mile != None %}
+              var expired_miles = {{element.element_expired_mile}};
+              {% if element.element_name in hischeck %}
+                {% for his in history %}
+                  {% if his.element_name == element.element_name %}
+                  {% if his.miles != None %}
+                     var history_miles = {{his.miles}}
+                     console.log(plate_miles,history_miles,expired_miles)
+                     console.log((plate_miles - history_miles)/expired_miles)
+                     var element_check=(plate_miles - history_miles)/expired_miles
+                     if (element_check >= 1){
+                      document.getElementById("{{element.element_name}}_status").style.width = "100%"
+                      document.getElementById("{{element.element_name}}_status").classList.add('bg-danger')
+                      document.getElementById("{{element.element_name}}_status").classList.remove('bg-success')
+                      console.log(element_check)
+                     }else if (element_check >= 0.7){
+                      document.getElementById("{{element.element_name}}_status").style.width = (element_check*100)+"%"
+                      document.getElementById("{{element.element_name}}_status").classList.add('bg-warning')
+                      document.getElementById("{{element.element_name}}_status").classList.remove('bg-success')
+                      console.log(element_check)
+                     }else{
+                     document.getElementById("{{element.element_name}}_status").style.width = (element_check*100)+"%"
+                     }
+
+                  {% endif %}
+                  {% endif %}
+                {% endfor %}
+              {%endif%}
+            {%endif%}
+          {% endfor %}
+          {% for element in sub_data %}
+            {% if element.element_expired_mile != None %}
+              var expired_miles = {{element.element_expired_mile}};
+              {% if element.element_name in hischeck %}
+                {% for his in history %}
+                  {% if his.element_name == element.element_name %}
+                  {% if his.miles != None %}
+                     var history_miles = {{his.miles}}
+                     console.log(plate_miles,history_miles,expired_miles)
+                     console.log((plate_miles - history_miles)/expired_miles)
+                     var element_check=(plate_miles - history_miles)/expired_miles
+                     if (element_check >= 1){
+                      document.getElementById("{{element.element_name}}_status").style.width = "100%"
+                      document.getElementById("{{element.element_name}}_status").classList.add('bg-danger')
+                      document.getElementById("{{element.element_name}}_status").classList.remove('bg-success')
+                      console.log(element_check)
+                     }else if (element_check >= 0.7){
+                      document.getElementById("{{element.element_name}}_status").style.width = (element_check*100)+"%"
+                      document.getElementById("{{element.element_name}}_status").classList.add('bg-warning')
+                      document.getElementById("{{element.element_name}}_status").classList.remove('bg-success')
+                      console.log(element_check)
+                     }else{
+                     document.getElementById("{{element.element_name}}_status").style.width = (element_check*100)+"%"
+                     }
+
+                  {% endif %}
+                  {% endif %}
+                {% endfor %}
+              {%endif%}
+            {%endif%}
+          {% endfor %}
+          {% endif %}
+          });
+
+
+          $(document).ready(function(){
+          {% if btnclick == 'successful' or login_wrong == 'wrong' %}
+            $("#login_modal").modal("show")
+          {% endif %}
+          });
+          $(document).ready(function(){
+          {% if signup_wrong == 'wrong' %}
+            $("#signup_modal").modal("show")
+          {% endif %}
+          });
+          $(document).ready(function(){
+          {% if type_wrong == 'wrong' or plate_wrong == 'wrong' %}
+            $("#add_motor").modal("show")
+          {% endif %}
+          });
+
+
+
+
+
+
+
+      </script>
+
+
+
+
+    </body>
+  </html>

@@ -1,0 +1,59 @@
+<header class="fix-top">
+        <!all navbar    flex-column flex-md-row>
+        <nav class="container-lg px-4 navbar navbar-expand-sm navbar-light justify-content-end">
+            <a class="navbar-brand mr-auto" href="/">Cunt</a>
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav mr-3">
+              <li class="nav-item collapse navbar-collapse">
+                <a class="font-weight-bold nav-link disabled d-inline-flex">Welcome back, {{request.user}}</a>
+              </li>
+            </ul>
+            {% endif %}
+            <!icon&Login&logout>
+            <ul class="navbar-nav navbar-expand">
+              <li class="navbar-brand fa fa-user-circle-o fa-2x mr-0"></li>
+              <form method="post" class="my-0">
+              {% csrf_token %}
+                  <button class="btn btn-link " aria-hidden="true" type="submit" {% if user.is_authenticated %} name="logout_post" href="/" {% else %}name="login_from" {% endif %}>
+                  {% if user.is_authenticated %}
+                  Logout
+                  {% else %}
+                  Login
+                  {% endif %}
+                </button>
+              </form>
+            </ul>
+        </nav>
+        <!modals>
+        {% include 'account/signup.html' %}
+        <div class="modal fade" id="login_modal">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="fa fa-user-circle-o fa-3x mx-auto my-0"></h1>
+              </div>
+              <div class="modal-body">
+
+                <form method="POST" class="container">
+                {% csrf_token %}
+                  <div class="form-group row">
+                    <label >Email address</label>
+                    <input type="text" class="form-control" name="email">
+                  </div>
+                  <div class="form-group row">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+                    <small id="loginwrong">incorrect name or password</small>
+                  </div>
+                  <div class="row mt-5 justify-content-end">
+                    <button type="submit" class="btn btn-primary mr-auto" name="login_post">Submit</button>
+                    <a type="button" class="btn btn-link" data-toggle="modal" data-target="#signup_modal" data-dismiss="modal">sign up</a>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
