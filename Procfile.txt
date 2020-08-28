@@ -1,1 +1,1 @@
-web: gunicorn CuntWeb.wsgi --log-file -
+web: gunicorn src.wsgi --log-file -
