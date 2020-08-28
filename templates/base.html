@@ -498,7 +498,7 @@
               for (j=0; j < kid.length; j++){
                 a = kid[j]
                 txtValue = a.textContent || a.innerText;
-                console.log(txtValue);
+
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     child[j].style.display = "";
                 } else {
@@ -519,19 +519,18 @@
                   {% if his.element_name == element.element_name %}
                   {% if his.miles != None %}
                      var history_miles = {{his.miles}}
-                     console.log(plate_miles,history_miles,expired_miles)
-                     console.log((plate_miles - history_miles)/expired_miles)
+
                      var element_check=(plate_miles - history_miles)/expired_miles
                      if (element_check >= 1){
                       document.getElementById("{{element.element_name}}_status").style.width = "100%"
                       document.getElementById("{{element.element_name}}_status").classList.add('bg-danger')
                       document.getElementById("{{element.element_name}}_status").classList.remove('bg-success')
-                      console.log(element_check)
+
                      }else if (element_check >= 0.7){
                       document.getElementById("{{element.element_name}}_status").style.width = (element_check*100)+"%"
                       document.getElementById("{{element.element_name}}_status").classList.add('bg-warning')
                       document.getElementById("{{element.element_name}}_status").classList.remove('bg-success')
-                      console.log(element_check)
+
                      }else{
                      document.getElementById("{{element.element_name}}_status").style.width = (element_check*100)+"%"
                      }
@@ -550,19 +549,18 @@
                   {% if his.element_name == element.element_name %}
                   {% if his.miles != None %}
                      var history_miles = {{his.miles}}
-                     console.log(plate_miles,history_miles,expired_miles)
-                     console.log((plate_miles - history_miles)/expired_miles)
+
                      var element_check=(plate_miles - history_miles)/expired_miles
                      if (element_check >= 1){
                       document.getElementById("{{element.element_name}}_status").style.width = "100%"
                       document.getElementById("{{element.element_name}}_status").classList.add('bg-danger')
                       document.getElementById("{{element.element_name}}_status").classList.remove('bg-success')
-                      console.log(element_check)
+
                      }else if (element_check >= 0.7){
                       document.getElementById("{{element.element_name}}_status").style.width = (element_check*100)+"%"
                       document.getElementById("{{element.element_name}}_status").classList.add('bg-warning')
                       document.getElementById("{{element.element_name}}_status").classList.remove('bg-success')
-                      console.log(element_check)
+
                      }else{
                      document.getElementById("{{element.element_name}}_status").style.width = (element_check*100)+"%"
                      }
