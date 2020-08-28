@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-
+import django_heroku
+import dj_database_url
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
@@ -26,7 +27,7 @@ SECRET_KEY = 'z_9^+7+l6_#b)f7vj79_af&z_i+b=kfof2&*kou=fwk-kxuu&k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['cuntweb.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['rocky-river-51271.herokuapp.com', '127.0.0.1', 'localhost']
 
 LOGGING = {
     'version': 1,
@@ -49,6 +50,8 @@ INSTALLED_APPS = [
     'user',
     'home',
     'crispy_forms',
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -101,7 +104,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -147,3 +151,4 @@ STATICFILES_DIRS = (
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
