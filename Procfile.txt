@@ -1,5 +1,1 @@
-<<<<<<< HEAD
 web: gunicorn src.wsgi --log-file -
-=======
-web: gunicorn src.wsgi --log-file -
->>>>>>> 9156f8d... second commit
