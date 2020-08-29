@@ -108,14 +108,13 @@ DATABASES = {
     #}
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'dfhcm0puul2b4d',
-        'HOST': 'ec2-50-16-198-4.compute-1.amazonaws.com',
+        'NAME': 'd92jpn6gpbcl0b',
+        'HOST': 'ec2-54-86-57-171.compute-1.amazonaws.com',
         'PORT': 5432,
-        'USER': 'iwvfjdjkuhrbjs',
-        'PASSWORD': 'ea9926e7195ff061eb722bde378d434f30e1af80b2164ebc47445029fba04f7e',
+        'USER': 'bwqjlkuqqvzjzs',
+        'PASSWORD': 'b74fa28c17f06c5a0cc433adad882eb7538058b98068335774de13abf3bc7819',
     }
 }
-
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
 
