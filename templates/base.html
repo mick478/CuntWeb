@@ -103,14 +103,16 @@
         color:gray;
     }
     footer .mobile_option {
-
         display: none;
         background:#d9d9d9;
-
-        font-size:80%;
+        font-size:60%;
     }
+    footer .mobile_option button {
+        height:40px;
+    }
+
     footer {
-    height:40px;
+    height:100px;
     position: fixed;
     bottom: 0px;
     margin-right: auto;
@@ -120,10 +122,7 @@
     width: 0px;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
     }
-    footer {
-    position: fixed;
-    bottom: 0;
-    }
+
     footer .col {
         border:none;
         color:gray;
@@ -164,8 +163,11 @@
       body .desktop_option_describe {
         display: none;
       }
-      footer button{
-      display: none;
+      footer .mobile_option button {
+        font-size:200%;
+      }
+      footer .mobile_option button a{
+        display: none;
       }
     }
     @media only screen and (max-width: 992px) {
@@ -236,8 +238,8 @@
           </div>
           <div class="row  my-0 justify-content-md-center">
             <form method="post" class="form-inline my-auto ml-3 mx-auto pb-3">
-              <h4 class="mr-3">車牌號碼 : {{plate.plate}}</h4>
-              <h4 class="ml-3">公里數 : {{plate.miles}}</h4>
+              <h4 class="mx-auto px-3">車牌號碼 : {{plate.plate}}</h4>
+              <h4 class="mx-auto px-3">公里數 : {{plate.miles}}</h4>
             </form>
           </div>
         </div>
@@ -249,7 +251,6 @@
         <div class="row justify-content-md-center container-lg mx-auto">
           <div class="mr-auto px-4 container-fluid">
             <input type="text" id="filterinput" onkeyup="filter()" class="container-fluid" placeholder="關鍵字搜尋..."/>
-
           </div>
         </div>
 
@@ -411,12 +412,14 @@
       </section>
 
 
-
+      <nav class="navbar fixed-bottom navbar-light bg-light">
+        <a class="navbar-brand" href="#">Fixed bottom</a>
+      </nav>
 
 
 
       <footer class="container-fluid py-0 my-0">
-        <div class="fixed-bottom">
+        <nav class=" navbar fixed-bottom navbar-light bg-light">
         {% if plate_search == 'successful' %}
           <div class="container desktop_option mb-5">
             <form class="desktop_option row mt-3" method="post">
@@ -431,17 +434,17 @@
               <button type="submit" name="fixgistory" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="維修紀錄" class="mr-auto mx-2 btn btn-secondary rounded-circle fa fa-wrench fa-2x"></button>
             </form>
           </div>
-          <div class="container-fluid mobile_option px-0">
+          <div class="container-fluid mobile_option px-0 py-0">
             <form class="row row-cols-4 py-0  mx-1 mb-0" method="post">
               {% csrf_token %}
               {% if user.is_authenticated %}
-              <button  type="submit" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-motorcycle fa-lg"> 車輛管理</button>
+              <button  type="submit" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-motorcycle fa-lg "> <a>車輛管理</a></button>
               {% else %}
-              <button  type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-plus fa-lg"> 新增車輛</button>
+              <button  type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-plus fa-lg"> <a>新增車輛</a></button>
               {% endif %}
-              <button type="submit" name="platesearch" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto py-2 col fa fa-cogs fa-lg"> 零件總表</button>
-              <button type="submit" name="checkpart" value="{{plate.type}}" class="btn btn-outline-secondary mx-auto  col fa fa-th fa-lg"> 主零件檢視</button>
-              <button type="submit" name="fixgistory" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-wrench fa-lg"> 維修紀錄</button>
+              <button type="submit" name="platesearch" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-cogs fa-lg"> <a>零件總表</a></button>
+              <button type="submit" name="checkpart" value="{{plate.type}}" class="btn btn-outline-secondary mx-auto  col fa fa-th fa-lg"> <a>主零件檢視</a></button>
+              <button type="submit" name="fixgistory" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-wrench fa-lg"> <a>維修紀錄</a></button>
             </form>
           </div>
           {% else %}
@@ -449,7 +452,7 @@
             <li class="container mx-auto py-0 px-0">Hey shit cunt.</li>
           </div>
           {% endif %}
-        </div>
+        </nav>
       </footer>
 
       <!----ADD MOTOR MODAL----->
