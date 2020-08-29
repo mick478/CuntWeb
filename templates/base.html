@@ -6,19 +6,13 @@
     margin: 0;
     padding:0;
     background-color: white; /* Used if the image is unavailable */
-    height: 500px; /* You must set a specified height */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
+
+
     }
     header{
     border-bottom-style:solid;
     border-color:#d9d9d9;
     }
-    nav{
-        opacity:1;
-    }
-
     #loginwrong{
     display: none;
     {% if login_wrong == 'wrong' %}
@@ -56,13 +50,9 @@
     outline: none;
     color:block;
     }
-
-
     #filterinput::-webkit-input-placeholder {
     font-size: 20px;
     }
-
-
     #allli li {
       border: 1px solid #ddd;
       margin-top: -1px; /* Prevent double borders */
@@ -80,11 +70,14 @@
         {% else %}
         padding-top:3%;
         {% endif %}
-        display:flex;
+        display:block;
         color:block;
         list-style-type: none;
     }
-
+    .create_new_element{
+    height:36px;
+    font-size:60%;
+    }
 
     section h1.section_title{
         font-size:300%;
@@ -102,6 +95,9 @@
         background: black;
         color:gray;
     }
+     footer .desk_option {
+        background:white;
+    }
     footer .mobile_option {
         display: none;
         background:#d9d9d9;
@@ -111,13 +107,7 @@
         height:40px;
     }
 
-    footer {
-    height:100px;
-    position: fixed;
-    bottom: 0px;
-    margin-right: auto;
-    margin-left: auto;
-    }
+
     ::-webkit-scrollbar {
     width: 0px;  /* Remove scrollbar space */
     background: transparent;  /* Optional: just make scrollbar invisible */
@@ -180,8 +170,6 @@
       body .app_box {
         width: 100%;
       }
-      footer{
-        height:4vh;
       }
       #flowlist{
       height:auto;
@@ -254,7 +242,7 @@
           </div>
         </div>
 
-          <div class="row overflow-auto mt-2 mx-auto container-lg">
+          <div class="row overflow-auto mt-2 mx-auto container-lg" style="margin:60px;">
             <div class="container-fluid mx-auto">
               <form class="list-unstyled row row-cols-lg-4 row-cols-md-3 row-cols-1" id="flowlist">
                 {% for element in sub_data %}
@@ -263,7 +251,7 @@
                       <img src="{% static 'img/build.jpg' %}" class="mx-1" alt="...">
                     </div>
                     <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}">
-                      <name class="row ml-auto namecheck">{{element.element_name}}</name>
+                      <name class="row ml-auto">{{element.element_name}}</name>
                       <date class="row ml-auto">
 
                         {% if element.element_name in hischeck %}
@@ -288,7 +276,7 @@
                       <img src="{% static 'img/build.jpg' %}" class="mx-1" alt="...">
                     </div>
                     <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}">
-                      <name class="row ml-auto namecheck">{{element.element_name}}</name>
+                      <name class="row ml-auto">{{element.element_name}}</name>
                       <date class="row ml-auto">
 
                         {% if element.element_name in hischeck %}
@@ -310,8 +298,8 @@
                 {% endfor %}
                 {% if user_setting == 'successful' or search_status == 'all_elements' %}
                 <li class="col px-4 my-1 mx-0 container-fluid">
-                  <div class="px-0 container my-auto btn btn-outline-dark mx-1 my-0" data-target="#user_add_element" type="button" data-toggle="modal">
-                    <div class="row mx-auto namecheck fa fa-plus fa-2x " style="height:36px;">新增</div>
+                  <div class="" data-target="#user_add_element" type="button" data-toggle="modal">
+                    <div class="row pt-2 btn btn-outline-dark create_new_element fa fa-plus fa-2x" style="font-size:80%;width:184px;height:48px;"></div>
                   </div>
                 </li>
                 {% endif %}
@@ -397,7 +385,7 @@
                     <img src="{% static 'img/Cuntlogo.jpg' %}" class="mx-1" alt="...">
                   </div>
                   <div class="px-0 container-fluid my-auto">
-                    <name class="row ml-auto namecheck">{{each_history.element_name}}</name>
+                    <name class="row ml-auto">{{each_history.element_name}}</name>
                     <date class="row ml-auto">
                       {{each_history.create}}
                     </date>
@@ -410,19 +398,11 @@
         </div>
         {% endif %}
       </section>
-
-
-      <nav class="navbar fixed-bottom navbar-light bg-light">
-        <a class="navbar-brand" href="#">Fixed bottom</a>
-      </nav>
-
-
-
-      <footer class="container-fluid py-0 my-0">
-        <nav class=" navbar fixed-bottom navbar-light bg-light">
+      <footer class="py-0 my-0">
+        <div class="fixed-bottom px-0 py-0" style="background:white;">
         {% if plate_search == 'successful' %}
-          <div class="container desktop_option mb-5">
-            <form class="desktop_option row mt-3" method="post">
+          <div class="container-fluid desktop_option px-0 py-0">
+            <form class="col row mt-3 justify-content-md-center" method="post" >
               {% csrf_token %}
               {% if user.is_authenticated %}
               <button type="button" data-toggle="modal"  data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-motorcycle fa-2x"></button>
@@ -435,12 +415,12 @@
             </form>
           </div>
           <div class="container-fluid mobile_option px-0 py-0">
-            <form class="row row-cols-4 py-0  mx-1 mb-0" method="post">
+            <form class="col row row-cols-4 py-0 my-0 mx-0 px-0" method="post">
               {% csrf_token %}
               {% if user.is_authenticated %}
               <button  type="submit" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-motorcycle fa-lg "> <a>車輛管理</a></button>
               {% else %}
-              <button  type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-plus fa-lg"> <a>新增車輛</a></button>
+              <button  type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="btn btn-outline-secondary mx-auto py-2 col fa fa-plus fa-lg"> <a>新增車輛</a></button>
               {% endif %}
               <button type="submit" name="platesearch" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-cogs fa-lg"> <a>零件總表</a></button>
               <button type="submit" name="checkpart" value="{{plate.type}}" class="btn btn-outline-secondary mx-auto  col fa fa-th fa-lg"> <a>主零件檢視</a></button>
@@ -452,7 +432,7 @@
             <li class="container mx-auto py-0 px-0">Hey shit cunt.</li>
           </div>
           {% endif %}
-        </nav>
+        </div>
       </footer>
 
       <!----ADD MOTOR MODAL----->
