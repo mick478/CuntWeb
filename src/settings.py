@@ -27,7 +27,7 @@ SECRET_KEY = 'z_9^+7+l6_#b)f7vj79_af&z_i+b=kfof2&*kou=fwk-kxuu&k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['rocky-river-51271.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['cuntweb.herokuapp.com', '127.0.0.1', 'localhost']
 
 LOGGING = {
     'version': 1,
