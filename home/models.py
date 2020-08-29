@@ -14,7 +14,7 @@ class motor_element(models.Model):
 
 class motor_part(models.Model):
     part_title = models.CharField(max_length=30)
-    part_element = models.ManyToManyField(motor_element, blank=True, null=True)
+    part_element = models.ManyToManyField(motor_element, blank=True)
     def __str__(self):
         return self.part_title
 
@@ -47,9 +47,9 @@ class motor_plate(models.Model):
     plate = models.CharField(max_length=30)
     type = models.ForeignKey(motor_type, blank=True, null=True,  on_delete=models.SET_NULL)
     miles = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(999999)])
-    user = models.ManyToManyField(User, blank=True, null=True)
-    history = models.ManyToManyField(fix_history, blank=True, null=True)
-    new_elements = models.ManyToManyField(new_elements, blank=True, null=True)
+    user = models.ManyToManyField(User, blank=True)
+    history = models.ManyToManyField(fix_history, blank=True)
+    new_elements = models.ManyToManyField(new_elements, blank=True)
     def __str__(self):
         return self.plate
 

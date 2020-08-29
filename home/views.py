@@ -166,7 +166,6 @@ class home(TemplateView):
                 'sub_data': '',
             }
             context.update(contextadd)
-            print(context)
             return render(request, self.template_name, context)
 
         ##checkpart successful
@@ -201,6 +200,9 @@ class home(TemplateView):
                 history_list = history_check_plate(platematch)
                 ##sub_data
                 sub_data = new_elements.objects.filter(motor_plate=platematch).distinct()
+                self.context_status.context_status = {'userform': self.form,
+                                                      'plate_search': 'none',
+                                                      }
                 context = {
                     'plate_search': 'successful',
                     'search_status': 'all_elements',

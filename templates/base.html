@@ -103,10 +103,18 @@
         color:gray;
     }
     footer .mobile_option {
+
         display: none;
         background:#d9d9d9;
-        border-top-width:15px;
-        font-size:60%;
+
+        font-size:80%;
+    }
+    footer {
+    height:40px;
+    position: fixed;
+    bottom: 0px;
+    margin-right: auto;
+    margin-left: auto;
     }
     ::-webkit-scrollbar {
     width: 0px;  /* Remove scrollbar space */
@@ -132,7 +140,7 @@
     }
 
     #flowlist{
-    height:360px;
+    height:auto;
     overflow: auto;
     overflow-x: hidden;
 
@@ -155,6 +163,9 @@
     @media only screen and (max-width: 576px) {
       body .desktop_option_describe {
         display: none;
+      }
+      footer button{
+      display: none;
       }
     }
     @media only screen and (max-width: 992px) {
@@ -244,7 +255,7 @@
 
           <div class="row overflow-auto mt-2 mx-auto container-lg">
             <div class="container-fluid mx-auto">
-              <form class="list-unstyled row row-cols-lg-4 row-cols-md-3 row-cols-2" id="flowlist">
+              <form class="list-unstyled row row-cols-lg-4 row-cols-md-3 row-cols-1" id="flowlist">
                 {% for element in sub_data %}
                 <li class="col media px-4 my-1 mx-0 container-fluid" >
                     <div class="my-auto">
@@ -404,41 +415,41 @@
 
 
 
-      <footer class="fixed-bottom py-0 my-0">
-
+      <footer class="container-fluid py-0 my-0">
+        <div class="fixed-bottom">
         {% if plate_search == 'successful' %}
-        <div class="container desktop_option mb-5">
-          <form class="desktop_option row mt-3" method="post">
-            {% csrf_token %}
-            {% if user.is_authenticated %}
-            <button type="button" data-toggle="modal"  data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-motorcycle fa-2x"></button>
-            {% else %}
-            <button type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-plus fa-2x"></button>
-            {% endif %}
-            <button type="submit" name="platesearch" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="零件總表" class="mx-2 btn btn-secondary rounded-circle fa fa-cogs fa-2x"></button>
-            <button type="submit" name="checkpart" value="{{plate.type}}" data-toggle="tooltip" data-placement="bottom" title="主零件檢視" class="mx-2 btn btn-secondary rounded-circle fa fa-th fa-2x"></button>
-            <button type="submit" name="fixgistory" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="維修紀錄" class="mr-auto mx-2 btn btn-secondary rounded-circle fa fa-wrench fa-2x"></button>
-          </form>
+          <div class="container desktop_option mb-5">
+            <form class="desktop_option row mt-3" method="post">
+              {% csrf_token %}
+              {% if user.is_authenticated %}
+              <button type="button" data-toggle="modal"  data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-motorcycle fa-2x"></button>
+              {% else %}
+              <button type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-plus fa-2x"></button>
+              {% endif %}
+              <button type="submit" name="platesearch" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="零件總表" class="mx-2 btn btn-secondary rounded-circle fa fa-cogs fa-2x"></button>
+              <button type="submit" name="checkpart" value="{{plate.type}}" data-toggle="tooltip" data-placement="bottom" title="主零件檢視" class="mx-2 btn btn-secondary rounded-circle fa fa-th fa-2x"></button>
+              <button type="submit" name="fixgistory" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="維修紀錄" class="mr-auto mx-2 btn btn-secondary rounded-circle fa fa-wrench fa-2x"></button>
+            </form>
+          </div>
+          <div class="container-fluid mobile_option px-0">
+            <form class="row row-cols-4 py-0  mx-1 mb-0" method="post">
+              {% csrf_token %}
+              {% if user.is_authenticated %}
+              <button  type="submit" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-motorcycle fa-lg"> 車輛管理</button>
+              {% else %}
+              <button  type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-plus fa-lg"> 新增車輛</button>
+              {% endif %}
+              <button type="submit" name="platesearch" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto py-2 col fa fa-cogs fa-lg"> 零件總表</button>
+              <button type="submit" name="checkpart" value="{{plate.type}}" class="btn btn-outline-secondary mx-auto  col fa fa-th fa-lg"> 主零件檢視</button>
+              <button type="submit" name="fixgistory" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-wrench fa-lg"> 維修紀錄</button>
+            </form>
+          </div>
+          {% else %}
+          <div class="my_right container-fluid py-0 px-0 desktop_option">
+            <li class="container mx-auto py-0 px-0">Hey shit cunt.</li>
+          </div>
+          {% endif %}
         </div>
-        <div class="container-fluid mobile_option px-0">
-          <form class="row row-cols-4 py-0  mx-1 mb-0" method="post">
-            {% csrf_token %}
-            {% if user.is_authenticated %}
-            <button  type="submit" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-motorcycle fa-lg"> 車輛管理</button>
-            {% else %}
-            <button  type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="btn btn-outline-secondary mx-auto mx-auto py-2 col fa fa-plus fa-lg"> 新增車輛</button>
-            {% endif %}
-            <button type="submit" name="platesearch" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto py-2 col fa fa-cogs fa-lg"> 零件總表</button>
-            <button type="submit" name="checkpart" value="{{plate.type}}" class="btn btn-outline-secondary mx-auto  col fa fa-th fa-lg"> 主零件檢視</button>
-            <button type="submit" name="fixgistory" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-wrench fa-lg"> 維修紀錄</button>
-          </form>
-        </div>
-        {% else %}
-        <div class="my_right container-fluid py-0 px-0 desktop_option">
-          <li class="container mx-auto py-0 px-0">Hey shit cunt.</li>
-        </div>
-        {% endif %}
-
       </footer>
 
       <!----ADD MOTOR MODAL----->

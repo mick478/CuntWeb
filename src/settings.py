@@ -25,7 +25,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = 'z_9^+7+l6_#b)f7vj79_af&z_i+b=kfof2&*kou=fwk-kxuu&k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['rocky-river-51271.herokuapp.com', '127.0.0.1', 'localhost']
 
@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'home',
     'crispy_forms',
     'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -63,8 +62,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -102,7 +101,19 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'HOST': '',
+        'PORT': '',
+        'USER': '',
+        'PASSWORD': '',
     }
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': 'd8eghcgch072nk',
+    #    'HOST': 'ec2-54-146-91-153.compute-1.amazonaws.com',
+    #    'PORT': 5432,
+    #    'USER': 'wpktldhfbhanrq',
+    #    'PASSWORD': '37ef615ea9a0d38ba43eacfd29bcea5255b80e4480776a4384df6cb630e959d6',
+    #}
 }
 db_from_env = dj_database_url.config()
 DATABASES['default'].update(db_from_env)
