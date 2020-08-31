@@ -114,7 +114,7 @@ DATABASES = {
     #    'PORT': '5432',
     #    'USER': 'xkxtwhdugqpkjm',
     #    'PASSWORD': '30c0258ac5fa762df084de64bad84789e2a1adc436f9afa9d531cef3be270a86',
-    }
+    #}
 }
 
 db_from_env = dj_database_url.config()
