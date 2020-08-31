@@ -85,22 +85,22 @@ WSGI_APPLICATION = 'src.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'HOST': '',
-        'PORT': '',
-        'USER': '',
-        'PASSWORD': '',
-    }
     #'default': {
     #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': 'dedue9oli03ake',
-    #    'HOST': 'ec2-18-211-48-247.compute-1.amazonaws.com',
-    #    'PORT': '5432',
-    #    'USER': 'xkxtwhdugqpkjm',
-    #    'PASSWORD': '30c0258ac5fa762df084de64bad84789e2a1adc436f9afa9d531cef3be270a86',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #    'HOST': '',
+    #    'PORT': '',
+    #    'USER': '',
+    #    'PASSWORD': '',
     #}
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'dedue9oli03ake',
+        'HOST': 'ec2-18-211-48-247.compute-1.amazonaws.com',
+        'PORT': '5432',
+        'USER': 'xkxtwhdugqpkjm',
+        'PASSWORD': '30c0258ac5fa762df084de64bad84789e2a1adc436f9afa9d531cef3be270a86',
+    }
 }
 
 db_from_env = dj_database_url.config()
