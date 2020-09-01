@@ -50,6 +50,7 @@ class page_status():
 class home(TemplateView):
     template_name = 'base.html'
     ## forms here##
+
     form = RegistrationFrom()
     context_status = page_status('status')
     ##get action here##
@@ -270,10 +271,11 @@ class home(TemplateView):
                 return render(request, self.template_name, context)
 
         if 'signup_post' in request.POST:
-            if self.form.is_valid():
-                self.form.save()
-                username = self.form.cleaned_data['username']
-                password = self.form.cleaned_data['password1']
+            form = RegistrationFrom(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data['username']
+                password = form.cleaned_data['password1']
                 messages.success(request, 'Account was created for' + username)
                 user = authenticate(username=username, password=password)
                 login(request, user)
