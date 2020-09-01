@@ -69,7 +69,7 @@ class home(TemplateView):
             elements_list = all_elements_base(platematch.type).values_list('element_name', flat=True)
             new_elements_list = new_elements.objects.filter(motor_plate=platematch).values_list('element_name', flat=True)
             if element_name in elements_list or element_name == '' or element_name in new_elements_list:
-                ('repeat error')
+                print('repeat error')
             else:
                 new_element = new_elements(element_name=element_name)
                 new_element.save()

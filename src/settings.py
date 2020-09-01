@@ -93,6 +93,8 @@ DATABASES = {
         'USER': '',
         'PASSWORD': '',
     }
+}
+#DATABASES = {
     #'default': {
     #    'ENGINE': 'django.db.backends.sqlite3',
     #    'NAME': 'dedue9oli03ake',
@@ -101,10 +103,9 @@ DATABASES = {
     #    'USER': 'xkxtwhdugqpkjm',
     #    'PASSWORD': '30c0258ac5fa762df084de64bad84789e2a1adc436f9afa9d531cef3be270a86',
     #}
-}
+# }
 
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -141,6 +142,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -150,4 +153,5 @@ STATICFILES_DIRS = (
 )
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #STATIC_ROOT  = os.path.join(BASE_DIR, 'staticfiles')
+
 django_heroku.settings(locals())
