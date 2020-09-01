@@ -56,6 +56,7 @@ class home(TemplateView):
     def get(self, request, *args, **kwargs):
         self.context_status.context_status = {'userform': self.form,
                                               'plate_search': 'none',
+                                              'search_status': 'none',
                                               }
         return render(request, self.template_name, self.context_status.context_status)
 
@@ -90,7 +91,7 @@ class home(TemplateView):
             miles = request.POST.get('miles')
             if miles == '':
                 miles = 0
-            if motor_plate.objects.filter(plate=plate).exists() or plate=='':
+            if motor_plate.objects.filter(plate=plate).exists() or plate == '':
                 context = {
                     'plate_wrong': 'wrong'
                 }
@@ -175,11 +176,13 @@ class home(TemplateView):
         if 'checkpart' in request.POST:
             type = request.POST.get('checkpart')
             typematch = motor_type.objects.get(type_title=type)
+
             context = { 'search_status': 'parts',
                         'main_data': typematch.type_model.all(),
                         }
 
             self.context_status.context_status.update(context)
+            print(self.context_status.context_status.)
             return render(request, self.template_name, self.context_status.context_status)
 
         ##platesearch successful

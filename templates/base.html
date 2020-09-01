@@ -569,11 +569,7 @@
           {% endif %}
           });
 
-          $(document).ready(function(){
-          {% if plate_search == 'successful' %}
-            console.log({{plate.plate}})
-          {% endif %}
-          });
+
           $(document).ready(function(){
           {% if btnclick == 'successful' or login_wrong == 'wrong' %}
             $("#login_modal").modal("show")
