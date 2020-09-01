@@ -136,7 +136,7 @@ class home(TemplateView):
             if motor_element.objects.filter(element_name=elementname).exists():
                 elementitem = motor_element.objects.get(element_name=elementname)
             if new_elements.objects.filter(element_name=elementname).exists():
-                elementitem = new_elements.objects.get(element_name=elementname)
+                elementitem = new_elements.objects.get(element_name=elementname, motor_plate__in=[platematch])
 
             fix = fix_history(plate=platematch.plate, miles=platematch.miles, element_name=elementitem.element_name, element_id=elementitem.element_id)
             fix.save()
