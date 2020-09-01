@@ -75,9 +75,11 @@ class home(TemplateView):
                 new_element.save()
                 platematch.new_elements.add(new_element)
             sub_data = new_elements.objects.filter(motor_plate=platematch).distinct()
+
             context = {
                 'sub_data': sub_data,
             }
+            del self.context_status.context_status['sub_data']
             self.context_status.context_status.update(context)
             return render(request, self.template_name, self.context_status.context_status)
 
@@ -154,6 +156,7 @@ class home(TemplateView):
             context = {'search_status': 'part_elements',
                        'main_data': elements,
                        }
+            del self.context_status.context_status['main_data']
             self.context_status.context_status.update(context)
             if model == '自訂':
                 context = {'user_setting': 'successful',
@@ -175,6 +178,7 @@ class home(TemplateView):
             context = { 'search_status': 'parts',
                         'main_data': typematch.type_model.all(),
                         }
+            del self.context_status.context_status['main_data']
             self.context_status.context_status.update(context)
             return render(request, self.template_name, self.context_status.context_status)
 

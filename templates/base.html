@@ -7,7 +7,7 @@
     padding:0;
     background-color: white; /* Used if the image is unavailable */
 
-
+    -webkit-appearance: none;
     }
     header{
     border-bottom-style:solid;
@@ -250,7 +250,7 @@
                     <div class="my-auto">
                       <img src="{% static 'img/build.jpg' %}" class="mx-1" alt="...">
                     </div>
-                    <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}">
+                    <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}" style="background:'none';">
                       <name class="row ml-auto">{{element.element_name}}</name>
                       <date class="row ml-auto">
 
