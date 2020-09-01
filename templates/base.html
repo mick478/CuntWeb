@@ -381,7 +381,7 @@
               <form class="list-unstyled row row-cols-1">
                 {% for each_history in main_data %}
 
-                <li class="col media px-4 my-1 mx-0 container-fluid" type="button" data-toggle="modal" data-target="#{{element.element_name}}">
+                <li class="col media px-4 my-1 mx-0 container-fluid" type="button" data-toggle="modal" data-target="#{{element.element_name}}" style="-webkit-appearance: none;">
                   <div class="my-auto">
                     <img src="{% static 'img/Cuntlogo.jpg' %}" class="mx-1" alt="...">
                   </div>
@@ -411,7 +411,7 @@
               <button type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="ml-auto mx-2 btn btn-secondary rounded-circle fa fa-plus fa-2x"></button>
               {% endif %}
               <button type="submit" name="platesearch" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="零件總表" class="mx-2 btn btn-secondary rounded-circle fa fa-cogs fa-2x"></button>
-              <button type="submit" name="checkpart" value="{{plate.type}}" data-toggle="tooltip" data-placement="bottom" title="主零件檢視" class="mx-2 btn btn-secondary rounded-circle fa fa-th fa-2x"></button>
+              <button type="submit" name="checkpart" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="主零件檢視" class="mx-2 btn btn-secondary rounded-circle fa fa-th fa-2x"></button>
               <button type="submit" name="fixgistory" value="{{plate.plate}}" data-toggle="tooltip" data-placement="bottom" title="維修紀錄" class="mr-auto mx-2 btn btn-secondary rounded-circle fa fa-wrench fa-2x"></button>
             </form>
           </div>
@@ -424,7 +424,7 @@
               <button  type="button" data-toggle="modal" data-target="#add_motor" data-placement="bottom" title="Add_plate" class="btn btn-outline-secondary mx-auto py-2 col fa fa-plus fa-lg"> <a>新增車輛</a></button>
               {% endif %}
               <button type="submit" name="platesearch" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-cogs fa-lg"> <a>零件總表</a></button>
-              <button type="submit" name="checkpart" value="{{plate.type}}" class="btn btn-outline-secondary mx-auto  col fa fa-th fa-lg"> <a>主零件檢視</a></button>
+              <button type="submit" name="checkpart" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-th fa-lg"> <a>主零件檢視</a></button>
               <button type="submit" name="fixgistory" value="{{plate.plate}}" class="btn btn-outline-secondary mx-auto  col fa fa-wrench fa-lg"> <a>維修紀錄</a></button>
             </form>
           </div>

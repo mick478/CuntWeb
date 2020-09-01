@@ -117,6 +117,7 @@ class home(TemplateView):
             context = {
                 'plate_search': 'successful',
                 'search_status': 'all_fix_history',
+                'plate': platematch,
                 'main_data': history_list[::1],
             }
 
@@ -142,6 +143,8 @@ class home(TemplateView):
             platematch.history.add(fix)
             history_list = history_check_plate(platematch)
             context = {
+                'plate_search': 'successful',
+                'plate': platematch,
                 'history': history_list[1],
                 'hischeck': history_list[0]
             }
@@ -175,11 +178,16 @@ class home(TemplateView):
 
         ##checkpart successful
         if 'checkpart' in request.POST:
-            type = request.POST.get('checkpart')
-            typematch = motor_type.objects.get(type_title=type)
+            platenumber = request.POST.get('checkpart')
+            platematch = motor_plate.objects.get(plate=platenumber)
+            typematch = motor_type.objects.get(type_title=platematch.type)
+            history_list = history_check_plate(platematch)
             context = { 'plate_search': 'successful',
                         'search_status': 'parts',
+                        'plate': platematch,
                         'main_data': typematch.type_model.all(),
+                        'history': history_list[1],
+                        'hischeck': history_list[0],
                         }
 
             self.context_status.context_status.update(context)
