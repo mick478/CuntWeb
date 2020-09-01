@@ -251,7 +251,7 @@
                     <div class="my-auto">
                       <img src="{% static 'img/build.jpg' %}" class="mx-1" alt="...">
                     </div>
-                    <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}" style="background:'none';">
+                    <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}" style="-webkit-appearance: none;">
                       <name class="row ml-auto">{{element.element_name}}</name>
                       <date class="row ml-auto">
 
@@ -276,7 +276,7 @@
                     <div class="my-auto">
                       <img src="{% static 'img/build.jpg' %}" class="mx-1" alt="...">
                     </div>
-                    <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}">
+                    <div class="px-0 container-fluid my-auto" type="button" data-toggle="modal" data-target="#{{element.element_name}}" style="-webkit-appearance: none;">
                       <name class="row ml-auto">{{element.element_name}}</name>
                       <date class="row ml-auto">
 
@@ -299,7 +299,7 @@
                 {% endfor %}
                 {% if user_setting == 'successful' or search_status == 'all_elements' %}
                 <li class="col px-4 my-1 mx-0 container-fluid">
-                  <div class="" data-target="#user_add_element" type="button" data-toggle="modal">
+                  <div class="" data-target="#user_add_element" type="button" data-toggle="modal" style="-webkit-appearance: none;">
                     <div class="row pt-2 btn btn-outline-dark create_new_element fa fa-plus fa-2x" style="font-size:80%;width:184px;height:48px;"></div>
                   </div>
                 </li>
