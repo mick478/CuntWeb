@@ -182,7 +182,7 @@ class home(TemplateView):
                         }
 
             self.context_status.context_status.update(context)
-            print(self.context_status.context_status.)
+            print(self.context_status.context_status)
             return render(request, self.template_name, self.context_status.context_status)
 
         ##platesearch successful
