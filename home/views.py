@@ -56,7 +56,6 @@ class home(TemplateView):
     def get(self, request, *args, **kwargs):
         self.context_status.context_status = {'userform': self.form,
                                               'plate_search': 'none',
-                                              'search_status': 'none',
                                               }
         return render(request, self.template_name, self.context_status.context_status)
 
@@ -116,6 +115,7 @@ class home(TemplateView):
             timestart = history_list.values_list('create', flat=True)
 
             context = {
+                'plate_search': 'successful',
                 'search_status': 'all_fix_history',
                 'main_data': history_list[::1],
             }
@@ -154,7 +154,8 @@ class home(TemplateView):
             model = request.POST.get('partsearch')
             part = motor_part.objects.filter(part_title=model)
             elements = motor_element.objects.filter(motor_part__in=part).distinct()
-            context = {'search_status': 'part_elements',
+            context = {'plate_search': 'successful',
+                        'search_status': 'part_elements',
                        'main_data': elements,
                        }
 
@@ -176,13 +177,12 @@ class home(TemplateView):
         if 'checkpart' in request.POST:
             type = request.POST.get('checkpart')
             typematch = motor_type.objects.get(type_title=type)
-
-            context = { 'search_status': 'parts',
+            context = { 'plate_search': 'successful',
+                        'search_status': 'parts',
                         'main_data': typematch.type_model.all(),
                         }
 
             self.context_status.context_status.update(context)
-            print(self.context_status.context_status)
             return render(request, self.template_name, self.context_status.context_status)
 
         ##platesearch successful
