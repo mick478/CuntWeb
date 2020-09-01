@@ -1,0 +1,25 @@
+[
+{
+    "model": "home.motor_type",
+    "pk": 2,
+    "fields": {
+        "type_title": "FB12V",
+        "type_model": [
+            5,
+            6,
+            8
+        ]
+    }
+},
+{
+    "model": "home.motor_type",
+    "pk": 3,
+    "fields": {
+        "type_title": "None",
+        "type_model": [
+            6,
+            8
+        ]
+    }
+}
+]
