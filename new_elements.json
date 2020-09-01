@@ -1,0 +1,12 @@
+[
+{
+    "model": "home.new_elements",
+    "pk": 17,
+    "fields": {
+        "element_id": null,
+        "element_name": "\u5927\u71c8",
+        "element_expired_mile": null,
+        "element_expired_year": null
+    }
+}
+]
