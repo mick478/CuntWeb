@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import RegistrationFrom, motorpartform,motorelementform
 from django.contrib import messages
@@ -39,7 +39,7 @@ def addnewmotor(platenumber, miles, type, user):
         newone.user = user
         newone.save()
 
-
+##status control<1005117>
 class page_status():
     def __init__(self, context_status):
         self.context_status = context_status
@@ -50,9 +50,9 @@ class page_status():
 class home(TemplateView):
     template_name = 'base.html'
     ## forms here##
-
+    context_status = page_status
     form = RegistrationFrom()
-    context_status = page_status('status')
+
     ##get action here##
     def get(self, request, *args, **kwargs):
         self.context_status.context_status = {'userform': self.form,
@@ -84,7 +84,7 @@ class home(TemplateView):
             self.context_status.context_status.update(context)
             return render(request, self.template_name, self.context_status.context_status)
 
-
+        ##create new motor
         if 'add_motor' in request.POST:
             type = request.POST.get('type')
             plate = request.POST.get('plate')
