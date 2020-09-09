@@ -6,8 +6,8 @@
 
 ## Model
 ![Image of model](/cuntweb_pics/model.JPG)
-![Image of model](/cuntweb_pics/web01.JPG)
-![Image of model](/cuntweb_pics/web02.JPG)
+![Image of model](/cuntweb_pics/web_01.JPG)
+![Image of model](/cuntweb_pics/web_02.JPG)
 	
 ## View
 Context_status:
