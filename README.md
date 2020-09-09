@@ -13,19 +13,12 @@ Context_status:
 Setting the status for checking action of user
 
 context{
-
 'plate_search': 'successful',
-
 'search_status': 'parts',
-
 'plate': platematch,
-
 'main_data': typematch.type_model.all(),
-
 'history': history_list[1],
-
 'hischeck': history_list[0],
-
 }
 
 * plate_search: have been searched or not
