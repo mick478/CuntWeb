@@ -5,7 +5,7 @@
 * [Heroku](#Heroku)
 
 ## Model
-![Image of Yaktocat](https://github.com/rickeyting/images/tree/master/cuntweb_pics/model.JPG)
+![Image of Yaktocat](https://octodex.github.com/images/cuntweb_pics/model.JPG)
 	
 ## View
 Context_status:
