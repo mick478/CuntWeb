@@ -9,15 +9,15 @@ This project is simple Lorem ipsum dolor generator.
 	
 ## View
 Context_status:
-Setting the status for checking action of user
-context{
-'plate_search': 'successful',
-'search_status': 'parts',
-'plate': platematch,
-'main_data': typematch.type_model.all(),
-'history': history_list[1],
-'hischeck': history_list[0],
-}
+`Setting the status for checking action of user
+`context{
+`'plate_search': 'successful',
+`'search_status': 'parts',
+`'plate': platematch,
+`'main_data': typematch.type_model.all(),
+`'history': history_list[1],
+`'hischeck': history_list[0],
+`}
 * plate_search: have been searched or not
 * search_status: depend on the status to show the home page or others
 * plate: which platenumber is active and get the data from this plate
