@@ -5,7 +5,9 @@
 * [Heroku](#Heroku)
 
 ## Model
-![Image of Yaktocat](/cuntweb_pics/model.JPG)
+![Image of model](/cuntweb_pics/model.JPG)
+![Image of model](/cuntweb_pics/web01.JPG)
+![Image of model](/cuntweb_pics/web02.JPG)
 	
 ## View
 Context_status:
