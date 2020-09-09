@@ -5,7 +5,7 @@
 * [Heroku](#Heroku)
 
 ## Model
-This project is simple Lorem ipsum dolor generator.
+![Image of Yaktocat](https://github.com/rickeyting/images/tree/master/cuntweb_pics/model.JPG)
 	
 ## View
 Context_status:
