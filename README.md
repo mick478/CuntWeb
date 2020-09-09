@@ -9,10 +9,10 @@ This project is simple Lorem ipsum dolor generator.
 	
 ## View
 Context_status:
-`Setting the status for checking action of user
-context{
-'plate_search': 'successful',
-'search_status': 'parts',
+`Setting the status for checking action of user`
+`context{`
+`'plate_search': 'successful',`
+`'search_status': 'parts',
 'plate': platematch,
 'main_data': typematch.type_model.all(),
 'history': history_list[1],
