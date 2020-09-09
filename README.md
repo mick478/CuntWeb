@@ -5,12 +5,16 @@
 * [Heroku](#Heroku)
 
 ## Model
-The url is same. differen requests will response for diffenert data.
 * Relationships of model
+
 ![Image of model](/cuntweb_pics/model.JPG)
+
 * Home page and data page
+
 ![Image of model](/cuntweb_pics/web_01.JPG)
-* History page and 
+
+* History page and database
+
 ![Image of model](/cuntweb_pics/web_02.JPG)
 	
 ## View
